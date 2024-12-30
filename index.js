@@ -9,20 +9,21 @@ document.getElementById("startGame").addEventListener('click', startGame);
 
 function saveFile()
 {
-    let fileName = document.getElementById('fileName').value;
-    fileHelp.setFileName(fileName);
     fileHelp.saveFile('i found it');
 }
 
 function startGame() {
 
-    let startBlock = new storyBlock(1,"This is a start to the story",
-        [ {choice: "choice 1", next: undefined }, {choice: "choice 2", nextId: 2}]);
+    let startBlock = new storyBlock(1,"Choose a door to go through",
+        [ {choice: "Red door", nextId: 2 }, {choice: "Green door", nextId: 2}]);
 
-    let block = new storyBlock(2, "This is a second part",
-        [ {choice: "choice 1", next: undefined }, {choice: "choice 2", nextId: undefined}]);
+    let block = new storyBlock(2, "U see a giant troll.",
+        [ {choice: "Run", nextId: 3 }, {choice: "Fight", nextId: 3}]);
 
-    let game = new Game([startBlock, block]);
+    let end = new storyBlock(3, "Troll killed u either way. The End.",
+        []);
+
+    let game = new Game([startBlock, block, end]);
     game.prepareGame();
     game.startGame();
 }
