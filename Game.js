@@ -22,21 +22,25 @@ export class Game
     generateStoryBlockHtml(storyBlock){
         let storyBlockFrame = document.getElementById("gameFrame");
 
+        let blockDiv = document.createElement("div");
+
         let plotParagraph = document.createElement("p");
         plotParagraph.textContent = storyBlock.plot;
-        storyBlockFrame.appendChild(plotParagraph);
+        blockDiv.appendChild(plotParagraph);
 
         storyBlock.choices.forEach(c => {
             let choiceButton = document.createElement("button");
-            choiceButton.addEventListener('click', () => this.createNextBlock(c.nextId, choiceButton));
+            choiceButton.addEventListener('click', () => this.createNextBlock(c.nextId, blockDiv));
             choiceButton.textContent = c.choice;
-            storyBlockFrame.appendChild(choiceButton);
+            blockDiv.appendChild(choiceButton);
         });
+
+        storyBlockFrame.appendChild(blockDiv);
     }
 
-    createNextBlock(nextId, choiceButton)
+    createNextBlock(nextId, blockDiv)
     {
-        choiceButton.disabled = true;
+        blockDiv.remove();
         let storyBlockFrame = document.getElementById("gameFrame");
 
         if(nextId === undefined)
