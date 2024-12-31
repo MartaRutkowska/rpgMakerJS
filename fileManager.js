@@ -11,11 +11,9 @@ export class fileManager {
         URL.revokeObjectURL(link.href);
     }
 
-    loadFile()
-    {
+    loadFile() {
         let file = document.getElementById("loadFile").files[0];
-        if(file)
-        {
+        if (file) {
             let reader = new FileReader();
             reader.readAsText(file, "UTF-8");
 
