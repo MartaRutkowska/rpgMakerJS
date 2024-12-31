@@ -5,11 +5,16 @@
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-<input type="file" id="loadFile">
-<button class="saveFiles" id="saveFile">Save game</button>
-<br/>
-<button id="startGame" class="start">Start game</button>
-<br/>
+    <button id="buildMode" style="display: block;">Switch to build mode</button>
+    <button id="storyMode" style="display: none;">Switch to game mode</button>
+    <button id="startGame" class="start">Start game</button>
+    <br/>
+    <div class="controls">
+        <input type="file" id="loadFile">
+        <br/>
+        <button id="saveFile">Save game</button>
+        <br/>
+    </div>
 <script type="module" src="index.js"></script>
 <script type="module" src="fileManager.js"></script>
 <script type="module" src="htmlManager.js"></script>

@@ -15,8 +15,8 @@ export class Game {
     }
 
     #prepareGame() {
-        htmlManager.hideStart();
-        htmlManager.removeEnd();
+        htmlManager.displayNone("startGame");
+        htmlManager.remove("end");
         htmlManager.generateGameFrame();
     }
 
@@ -45,16 +45,16 @@ export class Game {
     #createNextBlock(nextId, storyDiv) {
         storyDiv.remove();
         let nextStoryBlock = this.storyBlocks.filter(s => s.id === nextId);
-        if (nextStoryBlock === undefined || nextStoryBlock.length != 1) console.log("I shat myself, sorry");
+        if (nextStoryBlock === undefined || nextStoryBlock.length != 1) console.log('I shat myself, sorry');
         this.#generateStoryBlock(nextStoryBlock[0]);
     }
 
     #endGame(storyBlock) {
         let storyDiv = htmlManager.createStoryDiv();
-        storyDiv.id = "end";
+        storyDiv.id = 'end';
 
         htmlManager.createParagraph(storyDiv, storyBlock.plot);
         htmlManager.getGameFrame().appendChild(storyDiv);
-        htmlManager.showRestart();
+        htmlManager.displayBlock("startGame");
     }
 }

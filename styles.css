@@ -4,13 +4,13 @@ body {
     font-size: 1.5em;
 }
 
-button {
+input, button {
     background: black;
     color: white;
     border-radius: 10px;
-    margin: 1%;
-    padding: 1%;
-    font-size: 1.5em;
+    margin: 0.5%;
+    padding: 0.5%;
+    font-size: 1em;
 }
 
 p {
@@ -30,6 +30,7 @@ p {
     text-align: center;
     margin-left: 20%;
     border: 3px solid white;
+    margin-top:3%;
 }
 
 .storyBlock {
@@ -42,7 +43,12 @@ p {
 .saveFiles {
     width: 10%;
     padding: 1%;
-    position: absolute;
     right: 7%;
     bottom: 7%;
+}
+
+.controls {
+    position: absolute;
+    bottom: 3%;
+    left: 1%;
 }
