@@ -1,80 +1,60 @@
-import { HtmlManager } from './HtmlManager.js'
+import {htmlManager} from './htmlManager.js'
 
-export class Game
-{
-    constructor(storyBlocks)
-    {
+export class Game {
+    constructor(storyBlocks) {
         this.storyBlocks = storyBlocks;
     }
 
-    startGame()
-    {
+    startGame() {
+        if (this.storyBlocks.length == 0) return;
+
         this.#clearGame();
         this.#prepareGame();
-        if(this.storyBlocks.length == 0) return;
-        let previousEnd = document.getElementById("end")?.remove();
 
-        this.#generateStoryBlockHtml(this.storyBlocks[0]);
-        document.getElementById("startGame").style.visibility = 'hidden';
+        this.#generateStoryBlock(this.storyBlocks[0]);
     }
 
-    #prepareGame()
-    {
-        HtmlManager.generateGameFrame();
+    #prepareGame() {
+        htmlManager.hideStart();
+        htmlManager.removeEnd();
+        htmlManager.generateGameFrame();
     }
 
-    #clearGame(){
-        HtmlManager.clearGameFrame();
+    #clearGame() {
+        htmlManager.clearGameFrame();
     }
 
-    #generateStoryBlockHtml(storyBlock){
-        let storyBlockFrame = document.getElementById("gameFrame");
+    #generateStoryBlock(storyBlock) {
 
-        let blockDiv = document.createElement("div");
-        blockDiv.classList.add("storyBlock")
-
-        HtmlManager.createParagraph(blockDiv, storyBlock.plot);
-
-        if(storyBlock.choices.length == 0){
+        if (storyBlock.choices.length == 0) {
             this.#endGame(storyBlock);
             return;
         }
 
+        let storyDiv = htmlManager.createStoryDiv();
+        htmlManager.createParagraph(storyDiv, storyBlock.plot);
+
         storyBlock.choices.forEach(c => {
-            let choiceButton = document.createElement("button");
-            choiceButton.addEventListener('click', () => this.#createNextBlock(c.nextId, blockDiv));
-            choiceButton.textContent = c.choice;
-            blockDiv.appendChild(choiceButton);
-            blockDiv.appendChild(document.createElement("br"));
+            htmlManager.createChoiceButton(storyDiv, c,
+                () => this.#createNextBlock(c.nextId, storyDiv));
         });
 
-        storyBlockFrame.appendChild(blockDiv);
+        htmlManager.getGameFrame().appendChild(storyDiv);
     }
 
-    #createNextBlock(nextId, blockDiv)
-    {
-        blockDiv.remove();
-        let storyBlockFrame = document.getElementById("gameFrame");
-
+    #createNextBlock(nextId, storyDiv) {
+        storyDiv.remove();
         let nextStoryBlock = this.storyBlocks.filter(s => s.id === nextId);
-        if(nextStoryBlock === undefined || nextStoryBlock.length != 1) console.log("I shat myself, sorry");
-        this.#generateStoryBlockHtml(nextStoryBlock[0]);
+        if (nextStoryBlock === undefined || nextStoryBlock.length != 1) console.log("I shat myself, sorry");
+        this.#generateStoryBlock(nextStoryBlock[0]);
     }
 
-    #endGame(storyBlock){
-        let storyBlockFrame = document.getElementById("gameFrame");
-        let blockDiv = document.createElement("div");
-        blockDiv.classList.add("storyBlock")
-        blockDiv.id = "end";
+    #endGame(storyBlock) {
+        let storyDiv = htmlManager.createStoryDiv();
+        storyDiv.id = "end";
 
-        let end = document.createElement("p");
-        end.textContent = storyBlock.plot;
-        blockDiv.appendChild(end);
-        blockDiv.appendChild(document.createElement("br"));
-        storyBlockFrame.appendChild(blockDiv);
-
-        let restart = document.getElementById("startGame");
-        restart.textContent = 'Restart game';
-        restart.style.visibility = 'visible';
+        htmlManager.createParagraph(storyDiv, storyBlock.plot);
+        htmlManager.getGameFrame().appendChild(storyDiv);
+        htmlManager.showRestart();
     }
 }
