@@ -21,10 +21,10 @@ function loadFile()
         try{
             let deserializedGame = JSON.parse(file.result);
             gameInstance = new Game(deserializedGame.storyBlocks);
+            startGame();
         }
         catch{
             alert("faulty game file");
-            return;
         }
     })
 }
@@ -44,8 +44,6 @@ function startGame() {
 
         gameInstance = new Game([startBlock, block, end]);
     }
-
-    gameInstance.prepareGame();
     gameInstance.startGame();
 }
 
