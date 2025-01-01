@@ -2,12 +2,14 @@ import {fileManager} from './fileManager.js';
 import {storyBlock} from './storyBlock.js';
 import {Game} from './Game.js'
 import {htmlManager} from './htmlManager.js'
+import {gameBuilder} from './gameBuilder.js'
 
 document.getElementById('saveFile').addEventListener('click', saveFile);
 document.getElementById('loadFile').addEventListener('change', loadFile);
 document.getElementById('startGame').addEventListener('click', startGame);
 document.getElementById('buildMode').addEventListener('click', buildMode);
 document.getElementById('storyMode').addEventListener('click', storyMode);
+document.getElementById('addStoryBlock').addEventListener('click', addStoryBlock);
 
 var fileHelp = new fileManager();
 var gameInstance = undefined;
@@ -52,11 +54,18 @@ function buildMode(){
     htmlManager.displayNone('startGame');
     htmlManager.displayNone('buildMode');
     htmlManager.displayBlock('storyMode');
+    htmlManager.displayBlock('addStoryBlock');
 }
 
 function storyMode(){
     htmlManager.displayBlock('startGame');
     htmlManager.displayNone('storyMode');
     htmlManager.displayBlock('buildMode');
+    htmlManager.displayNone('addStoryBlock');
+}
+
+function addStoryBlock(){
+    gameBuilder.createBuildingArea();
+    gameBuilder.addBlock();
 }
 

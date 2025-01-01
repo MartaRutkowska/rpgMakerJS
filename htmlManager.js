@@ -6,10 +6,15 @@ export class htmlManager {
     }
 
     static clearGameFrame() {
-        const parent = document.getElementById('gameFrame')
+        const parent = document.getElementById('gameFrame');
         while (parent?.firstChild) {
-            parent.firstChild.remove()
+            parent.firstChild.remove();
         }
+    }
+
+    static createTextArea(div){
+        let textArea = document.createElement('textArea');
+        div.appendChild(textArea);
     }
 
     static createParagraph(div, text) {
