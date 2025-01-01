@@ -52,3 +52,11 @@ p {
     bottom: 3%;
     left: 1%;
 }
+
+.question{
+    background: grey;
+}
+
+.choice{
+    background: pink;
+}

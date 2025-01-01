@@ -7,9 +7,10 @@ export class gameBuilder {
     }
 
     static addBlock() {
-        htmlManager.createTextArea(document.getElementById('gameFrame'));
+        htmlManager.createTextArea(document.getElementById('gameFrame'), 'question');
 
         let createChoice = document.createElement('button');
+        htmlManager.getGameFrame().appendChild(document.createElement('br'));
         createChoice.textContent = "Add choice";
         createChoice.addEventListener('click', this.#createChoiceTextArea);
         htmlManager.getGameFrame().appendChild(createChoice);
@@ -18,6 +19,7 @@ export class gameBuilder {
     }
 
     static #createChoiceTextArea(){
-        htmlManager.createTextArea(document.getElementById('gameFrame'));
+        htmlManager.createTextArea(document.getElementById('gameFrame'), 'choice');
+        htmlManager.getGameFrame().appendChild(document.createElement('br'));
     }
 }

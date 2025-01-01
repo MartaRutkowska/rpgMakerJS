@@ -12,8 +12,9 @@ export class htmlManager {
         }
     }
 
-    static createTextArea(div){
+    static createTextArea(div, className){
         let textArea = document.createElement('textArea');
+        textArea.classList.add(className);
         div.appendChild(textArea);
     }
 
