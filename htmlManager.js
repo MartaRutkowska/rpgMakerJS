@@ -12,10 +12,11 @@ export class htmlManager {
         }
     }
 
-    static createTextArea(div, className){
+    static createTextAreaWithClass(div, className){
         let textArea = document.createElement('textArea');
         textArea.classList.add(className);
         div.appendChild(textArea);
+        return textArea;
     }
 
     static createParagraph(div, text) {

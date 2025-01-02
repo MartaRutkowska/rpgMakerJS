@@ -13,8 +13,10 @@ document.getElementById('addStoryBlock').addEventListener('click', addStoryBlock
 
 var fileHelp = new fileManager();
 var gameInstance = undefined;
+var builder = new gameBuilder();
 
 function saveFile() {
+    builder.saveGame();
     fileHelp.saveFile(gameInstance);
 }
 
@@ -65,7 +67,7 @@ function storyMode(){
 }
 
 function addStoryBlock(){
-    gameBuilder.createBuildingArea();
-    gameBuilder.addBlock();
+    builder.createBuildingArea();
+    builder.addBlock();
 }
 
