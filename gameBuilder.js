@@ -1,5 +1,6 @@
 import {htmlManager} from './htmlManager.js';
 import {storyBlock} from './storyBlock.js';
+import {Game} from './Game.js'
 
 export class gameBuilder {
 
